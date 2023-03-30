@@ -30,7 +30,11 @@ io.on('connection', (socket) => {
         readyPlayerCount++;
         
         if (readyPlayerCount === 2) {
-            io.emit('startGame', socket.id)//broadcast('startGame()')
+            io.emit('startGame', socket.id) //broadcast('startGame()') This way the second player will be the referee.
         }
+    })
+
+    socket.on('paddleMove', (paddleData) => {
+        socket.broadcast.emit('paddleMove', paddleData)
     })
 })
